@@ -1,6 +1,7 @@
 import ShopActionType from './shop.types';
 import { firestore, convetCollectionsToMap } from '../../firebase/firebase.utils';
- 
+
+
 
 // export const updateCollections = (collectionMap) =>({
 //     type : ShopActionType.UPDATE_COLLECTIONS,

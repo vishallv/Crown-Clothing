@@ -1,9 +1,12 @@
 import React from 'react';
+import {connect } from 'react-redux';
+
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+// import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+import {signUpStart} from '../../redux/user/user.action';
 
 import './sign-up.styles.scss';
 
@@ -24,29 +27,31 @@ class SighUp extends React.Component {
         event.preventDefault();
 
         const { displayName, email, password, confirmPassword } = this.state;
-
+        const {signUpStart} = this.props;
         if (password !== confirmPassword) {
             alert("Password dont match");
             return;
         }
 
-        try {
+        signUpStart({displayName, email, password})
 
-            const { user } = await auth.createUserWithEmailAndPassword(email, password);
+        // try {
 
-            await createUserProfileDocument(user,{displayName});
+        //     const { user } = await auth.createUserWithEmailAndPassword(email, password);
 
-            this.setState({
-                displayName: '',
-                email: '',
-                password: '',
-                confirmPassword: ''
-            })
+        //     await createUserProfileDocument(user,{displayName});
 
-        }
-        catch (error) {
-            console.log(error);
-        }
+        //     this.setState({
+        //         displayName: '',
+        //         email: '',
+        //         password: '',
+        //         confirmPassword: ''
+        //     })
+
+        // }
+        // catch (error) {
+        //     console.log(error);
+        // }
 
 
     }
@@ -113,4 +118,8 @@ class SighUp extends React.Component {
     }
 }
 
-export default SighUp;
+const mapDispatchToProps = dispatch =>({
+    signUpStart : userCredential => dispatch(signUpStart(userCredential))
+})
+
+export default connect(null,mapDispatchToProps)(SighUp);
