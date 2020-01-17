@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {connect } from 'react-redux';
 
 
@@ -10,24 +10,34 @@ import {signUpStart} from '../../redux/user/user.action';
 
 import './sign-up.styles.scss';
 
-class SighUp extends React.Component {
+// class
+ const SighUp = ({signUpStart}) => {
+//  extends React.Component {
 
-    constructor() {
-        super();
+    // constructor() {
+    //     super();
 
-        this.state = {
-            displayName: '',
-            email: '',
-            password: '',
-            confirmPassword: ''
-        }
-    }
+        // this.state = {
+        //     displayName: '',
+        //     email: '',
+        //     password: '',
+        //     confirmPassword: ''
+        // }
+    // }
 
-    handleSubmit = async event => {
+    const [userCredential,setCredential] = useState({
+        displayName: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    });
+
+    const { displayName, email, password, confirmPassword } = userCredential;
+    const handleSubmit = async event => {
         event.preventDefault();
 
-        const { displayName, email, password, confirmPassword } = this.state;
-        const {signUpStart} = this.props;
+        // const { displayName, email, password, confirmPassword } = this.state;
+        // const {signUpStart} = this.props;
         if (password !== confirmPassword) {
             alert("Password dont match");
             return;
@@ -56,27 +66,27 @@ class SighUp extends React.Component {
 
     }
 
-    handleOnChange = (event) => {
+    const handleOnChange = (event) => {
 
         const { name, value } = event.target;
 
-        this.setState({ [name]: value });
+        setCredential({...userCredential, [name]: value });
     }
 
-    render() {
+    // render() {
 
-        const { displayName, email, password, confirmPassword } = this.state;
+        // const { displayName, email, password, confirmPassword } = this.state;
         return (
             <div className="sign-up">
                 <h2 className="title"> I do not have a account</h2>
                 <span>Sign up with your email amd passworrd</span>
-                <form className="sign-up-form" onSubmit={this.handleSubmit}>
+                <form className="sign-up-form" onSubmit={handleSubmit}>
 
                     <FormInput
                         type="text"
                         name="displayName"
                         value={displayName}
-                        handleChange={this.handleOnChange}
+                        handleChange={handleOnChange}
                         label="Display Name"
                         required
                     />
@@ -85,7 +95,7 @@ class SighUp extends React.Component {
                         type="email"
                         name="email"
                         value={email}
-                        handleChange={this.handleOnChange}
+                        handleChange={handleOnChange}
                         label="Email"
                         required
                     />
@@ -94,7 +104,7 @@ class SighUp extends React.Component {
                         type="password"
                         name="password"
                         value={password}
-                        handleChange={this.handleOnChange}
+                        handleChange={handleOnChange}
                         label="Password"
                         required
                     />
@@ -103,7 +113,7 @@ class SighUp extends React.Component {
                         type="password"
                         name="confirmPassword"
                         value={confirmPassword}
-                        handleChange={this.handleOnChange}
+                        handleChange={handleOnChange}
                         label="Confirm Password"
                         required
                     />
@@ -116,7 +126,7 @@ class SighUp extends React.Component {
 
         )
     }
-}
+// }
 
 const mapDispatchToProps = dispatch =>({
     signUpStart : userCredential => dispatch(signUpStart(userCredential))
