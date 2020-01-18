@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect}from 'react';
 import { Route } from 'react-router-dom';
 
 import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview.container';
@@ -20,17 +20,23 @@ import './shop.styles.scss';
 // const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
 // const CollectionPageWithSpinner = WithSpinner(CollectionPage); 
 
-class ShopPage extends React.Component{
+// class 
+const ShopPage = ({fetchCollectionStart,match}) =>{
+
+    useEffect(() => {
+        fetchCollectionStart();
+    },[fetchCollectionStart])
+//  extends React.Component{
 
 //    state = {
 //        loading : true
 //    }
 //     unSubscrribeFromSnapshot = null;
 
-    componentDidMount(){
+    // componentDidMount(){
 
-        const { fetchCollectionStart } = this.props;
-        fetchCollectionStart()
+    //     const { fetchCollectionStart } = this.props;
+    //     fetchCollectionStart()
         // const {updateCollections} = this.props;
 
         // const collectionRef = firestore.collection('collections');
@@ -64,12 +70,12 @@ class ShopPage extends React.Component{
         //      this.setState({loading : false});
         //  })
 
-    }
+    // }
     
 
-    render(){
+    // render(){
         
-        const { match  } = this.props;
+        // const { match  } = this.props;
         // const { loading } = this.state;
 
         return (
@@ -91,7 +97,7 @@ class ShopPage extends React.Component{
     }
 
 
-}
+// }
 
 
 // const mapStateToProps = createStructuredSelector({
